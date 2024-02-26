@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beats Player</title>
+    <style>
+        /* Set background color */
+        body {
+            background-color: #0A0A0A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins Medium', sans-serif; /* Apply Poppins Medium font to the whole document */
+        }
+
+        /* Define the @font-face rule to specify the custom font */
+        @font-face {
+            font-family: 'Poppins Medium';
+            src: url('Poppins-Medium.ttf') format('truetype'); /* Path to the font file */
+            font-weight: 500; /* Medium font weight */
+            font-style: normal; /* Normal font style */
+        }
+
+        @font-face {
+            font-family: 'Poppins Regular';
+            src: url('Poppins-Regular.ttf') format('truetype'); /* Path to the font file */
+            font-weight: normal; /* Normal font weight */
+            font-style: normal; /* Normal font style */
+        }
+
+        /* Style for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Style for the close button */
+        .close {
+            color: #fff;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Set box color */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Adjusted to accommodate three boxes */
+            gap: 10px;
+            justify-items: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+            width: 55%; /* Adjust the width as needed */
+            margin: auto; /* Center the grid container */
+        }
+
+        .card {
+            background-color: #ffffff00;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            max-width: 300px;
+            width: 100%;
+            overflow: hidden;
+            color: red; /* Apply text color */
+        }
+
+        .card img {
+            width: 75%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .video-overlay {
+            display: none;
+        }
+
+        .video-overlay iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .price {
+            font-size: 16px;
+            font-family: 'Poppins Medium', sans-serif;
+            display: inline;
+        }
+
+        .bpm {
+            font-size: 16px;
+            color: rgb(66, 66, 66);
+            font-family: 'Poppins Regular', sans-serif;
+            display: inline;
+            margin-left: 5px; /* Adjust the margin as needed */
+        }
+
+        .second-text {
+            font-size: 18px;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Grid layout for the cards -->
+<div class="grid-container">
+    <!-- Card 1 -->
+    <div class="card" onclick="playVideo('https://www.youtube.com/embed/N6hqgyIRqL8?si=BjIAl74DbuDOnuNc')">
+        <img src="image1.jpg" alt="Beat Image">
+        <div class="video-overlay" id="video_overlay_1"></div>
+        <div class="text-container">
+            <div class="price">$49.99</div>
+            <div class="bpm">80bpm</div>
+        </div>
+        <div class="second-text">Lil Durk X Nardo Wick Dark Trap Type Beat</div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" onclick="playVideo('https://www.youtube.com/embed/CLqwjKCoPSg?si=A2XVBgOZQWPPwToU')">
+        <img src="image2.jpg" alt="Beat Image">
+        <div class="video-overlay" id="video_overlay_2"></div>
+        <div class="text-container">
+            <div class="price">$49.99</div>
+            <div class="bpm">80bpm</div>
+        </div>
+        <div class="second-text">Travis Scott Astro World Type Beat</div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" onclick="playVideo('https://www.youtube.com/embed/CLqwjKCoPSg?si=A2XVBgOZQWPPwToU')">
+        <img src="image3.jpg" alt="Beat Image">
+        <div class="video-overlay" id="video_overlay_3"></div>
+        <div class="text-container">
+            <div class="price">$49.99</div>
+            <div class="bpm">80bpm</div>
+        </div>
+        <div class="second-text">Kanye West x Ty Dolla $ign Vultures Type Beat</div>
+    </div>
+</div>
+
+<script>
+    var currentOverlay = null;
+
+    function playVideo(embedUrl) {
+        if (currentOverlay) {
+            currentOverlay.innerHTML = '';
+            currentOverlay.style.display = 'none';
+        }
+        var card = event.currentTarget;
+        currentOverlay = card.querySelector('.video-overlay');
+        currentOverlay.innerHTML = '<iframe src="' + embedUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        currentOverlay.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
