@@ -195,9 +195,23 @@
         }
         var card = event.currentTarget;
         currentOverlay = card.querySelector('.video-overlay');
-        currentOverlay.innerHTML = '<iframe src="' + embedUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        currentOverlay.innerHTML = '<div class="close" onclick="closeVideo()">✕</div><iframe src="' + embedUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         currentOverlay.style.display = 'block';
     }
+
+    function closeVideo() {
+        if (currentOverlay) {
+            currentOverlay.innerHTML = '';
+            currentOverlay.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        var isClickInsideCard = event.target.closest('.card');
+        if (!isClickInsideCard && currentOverlay) {
+            closeVideo();
+        }
+    });
 </script>
 
 </body>
