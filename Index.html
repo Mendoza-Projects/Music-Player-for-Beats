@@ -7,7 +7,7 @@
     <style>
         /* Set background color */
         body {
-            background-color: #131313;
+            background-color: #0A0A0A;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -154,7 +154,7 @@
 <!-- Grid layout for the cards -->
 <div class="grid-container">
     <!-- Card 1 -->
-    <div class="card" onclick="playVideo('https://www.youtube.com/embed/9XdfXYwkTJc?si=kFwpvmjNMEmVWYBU')">
+    <div class="card" onclick="playVideo('https://www.youtube.com/embed/9XdfXYwkTJc?si=3UkjgmqsreddwpT5')">
         <img src="image1.jpg" alt="Beat Image">
         <div class="video-overlay" id="video_overlay_1"></div>
         <div class="text-container">
@@ -165,7 +165,7 @@
     </div>
 
     <!-- Card 2 -->
-    <div class="card" onclick="playVideo('https://www.youtube.com/embed/4KVI8QbJfb0?si=uoKa_tS1FdFXM-OS')">
+    <div class="card" onclick="playVideo('https://www.youtube.com/embed/4KVI8QbJfb0?si=6Y0AoT6uPtpdYVO9')">
         <img src="image2.jpg" alt="Beat Image">
         <div class="video-overlay" id="video_overlay_2"></div>
         <div class="text-container">
@@ -176,7 +176,7 @@
     </div>
 
     <!-- Card 3 -->
-    <div class="card" onclick="playVideo('https://www.youtube.com/embed/4KVI8QbJfb0?si=uoKa_tS1FdFXM-OS')">
+    <div class="card" onclick="playVideo('https://www.youtube.com/embed/4KVI8QbJfb0?si=6Y0AoT6uPtpdYVO9')">
         <img src="image3.jpg" alt="Beat Image">
         <div class="video-overlay" id="video_overlay_3"></div>
         <div class="text-container">
@@ -213,6 +213,23 @@
         if (!isClickInsideCard && currentOverlay) {
             closeVideo();
         }
+    });
+
+    // Update thumbnails dynamically
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach((card) => {
+            const embedUrl = card.getAttribute("onclick")
+                .match(/'([^']+)'/)[1]; // Extract URL inside onclick
+            const videoId = new URL(embedUrl).pathname.split("/").pop().split("?")[0]; // Get the YouTube video ID
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`; // Max res thumbnail
+
+            const img = card.querySelector("img");
+            if (img) {
+                img.src = thumbnailUrl; // Set the YouTube max-res thumbnail
+            }
+        });
     });
 </script>
 
